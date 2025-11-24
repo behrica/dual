@@ -9,7 +9,6 @@
               :as :json})
  :body
  :doc
-
  first
  (map #(select-keys % [:multi_ner :lemma])))
 
