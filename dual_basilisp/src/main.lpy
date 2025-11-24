@@ -1,0 +1,37 @@
+(ns main
+  (:require [basilisp.json])
+  (:import [starlette.applications :refer [Starlette]]
+           [starlette.responses :refer [PlainTextResponse]]
+           [starlette.routing :refer [Route]]
+           [uvicorn :refer [run]]
+           [stanza]))
+
+(stanza/download "en")
+(def nlp (stanza/Pipeline "en")) 
+
+
+
+(defn text-to-doc-response [s]
+  (let [doc  (nlp s)]
+    {:doc (.to_dict doc)
+     })
+  )
+
+(defn app [] 
+  (Starlette
+   :routes
+   [(Route "/text-to-doc"
+           (fn [request]
+             (println request)
+             (let [query-params (.-  request query_params)]
+               (PlainTextResponse (basilisp.json/write-str
+                                   (text-to-doc-response
+                                    (.get query-params "text")))))))]))               
+               
+             
+
+
+
+(println *main-ns*)
+(when (= *main-ns* 'main)
+  (run (app) ** :host "0.0.0.0"))

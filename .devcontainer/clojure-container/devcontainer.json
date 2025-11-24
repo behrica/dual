@@ -1,0 +1,31 @@
+// For format details, see https://aka.ms/devcontainer.json. For config options, see the
+// README at: https://github.com/scicloj/devcontainer-templates/tree/main/src/basecloj
+{
+	"name": "dual-clj",
+	"workspaceMount": "source=${localWorkspaceFolder}/dual_clj,target=/workspace,type=bind,consistency=cached", 
+	"workspaceFolder": "/workspace",
+	"build": {
+		"dockerfile": "Dockerfile",
+		"args": {
+			"BASE_IMAGE": "temurin-21-tools-deps-jammy",
+			"USERNAME": "${localEnv:USER:vscode}"
+		}
+	},
+	"remoteUser": "${localEnv:USER}",
+	"containerUser": "${localEnv:USER}",
+	"features": {
+		"ghcr.io/devcontainers/features/git:1": {},
+		"ghcr.io/eitsupi/devcontainer-features/jq-likes:2": {}
+	},
+	"customizations": {
+		"vscode": {
+			"extensions": [
+				"betterthantomorrow.calva"
+			]
+		}
+	},
+	"runArgs": ["--network", "dual-network",
+	            "--name", "dual-clj" ]
+
+
+}

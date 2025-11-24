@@ -1,0 +1,6 @@
+{:deps {
+        clj-http/clj-http {:mvn/version "3.12.3"}
+        cheshire/cheshire {:mvn/version "5.11.0"}
+        org.clojure/clojure {:mvn/version "1.12.3"}
+
+}}
