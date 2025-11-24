@@ -1,5 +1,3 @@
-// For format details, see https://aka.ms/devcontainer.json. For config options, see the
-// README at: https://github.com/scicloj/devcontainer-templates/tree/main/src/basecloj
 {
 	"name": "dual-clj",
 	"workspaceMount": "source=${localWorkspaceFolder}/dual_clj,target=/workspace,type=bind,consistency=cached", 
