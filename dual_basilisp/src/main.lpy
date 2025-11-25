@@ -4,7 +4,10 @@
            [starlette.responses :refer [PlainTextResponse]]
            [starlette.routing :refer [Route]]
            [uvicorn :refer [run]]
+           [threading :refer [Thread]]
+           [time :refer [sleep]]
            [stanza]))
+
 
 (stanza/download "en")
 (def nlp (stanza/Pipeline "en"))
@@ -25,9 +28,19 @@
                                     (.get query-params "text")))))))]))
 
 
+(def config (uvicorn/Config (app) ** :host "0.0.0.0"))
+(def server (uvicorn/Server config))
+(def thread (Thread ** :target (.- server run)))
 
 
+(comment
+  ; To start the server in a separate thread
+  (.start thread)  
+  ; To stop the server
+  (set! (.- server should_exit)  true)
+  
+  )
 
-(println *main-ns*)
+
 (when (= *main-ns* 'main)
   (run (app) ** :host "0.0.0.0"))
